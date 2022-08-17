@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
-  before_action :set_restaurant, only: %i[new create]
+  before_action :set_restaurant, only: %i[new create destroy]
+
   def new
     @review = Review.new # Needed to instantiate the form_for
   end
@@ -12,6 +13,13 @@ class ReviewsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @review = Review.find(params[:id])
+    @review.destroy
+    # No need for app/views/restaurants/destroy.html.erb
+    redirect_to restaurant_path(@restaurant), status: :see_other
   end
 
   private
