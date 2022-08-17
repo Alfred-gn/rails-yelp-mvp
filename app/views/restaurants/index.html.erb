@@ -1,0 +1,11 @@
+<ul display = "grid">
+  <% @restaurants.each do |restaurant| %>
+    <li>
+    <%= link_to(restaurant.name, restaurant_path(restaurant)) %>
+    <%= restaurant.phone_number %>
+    </li>
+
+  <% end %>
+</ul>
+
+<%= link_to("créer", new_restaurant_path) %>
